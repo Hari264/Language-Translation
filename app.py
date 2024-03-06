@@ -1,14 +1,20 @@
+import os
+import requests
+from flask import Flask, render_template, request
 import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
-import streamlit as st
+
 import pickle
+from flask import Flask,render_template
 
-
+app = Flask(__name__)
 hlen_mul_engmodel = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-mul-en")
 hlen_mul_engtokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-mul-en")
 hlen_eng_mulmodel =  AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-en-mul")
 hlen_eng_multokenizer =  AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-mul")
-
+@app.route('/')
+def home():
+      return render_template('index.html')
 
 # Load the pre-trained model
 with open('language_detection_model.pkl', 'rb') as model_file:
@@ -63,16 +69,29 @@ def hlen(source,target,text):
   else:
     a =  hlen_mul_eng(source,text)
     return hlen_eng_mul(target,a[0]['translation_text'])
+  
 
 
-text = st.text_area("Enter Text: ")
+app = Flask(__name__)
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    Target = 'hello'
+    if request.method == 'POST': 
+        
+        text = request.form.get('Text') 
+        target = request.form.get('Target')
+        source = predict_language_hlensk(text)
+        target = target_hlen(target)
+        h = hlen(source,target,text)
+        trans_text = h[0]['translation_text']
 
-target = st.selectbox('Language',['Telugu','Tamil','Hindi','Englsih','Bengali'])
+        return render_template('index.html',message=trans_text) 
+    else:
+        return render_template('index.html') 
 
-source = predict_language_hlensk(text)
-target = target_hlen(target)
-if st.button("Translate"):
-      h = hlen(source,target,text)
-      st.write(h[0]['translation_text'])
 
+  
+
+if __name__ == '__main__':
+    app.run()
 

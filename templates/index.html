@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            background-color: rgb(14, 17, 23);
+            color: white;
+            font-family: 'Poppins',sans-serif;
+        }
+     body{
+    margin-top: 20vh    ;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    -webkit-box-align: center;
+    align-items: center;
+
+        }
+   
+    .Text{
+        background-color: #2e2e35;
+        border:none;
+        border-radius: 7px;
+        width: 50vw;
+        padding-bottom: 10vh;
+        margin-block: 2vh;
+        font-size: 18px;
+
+    }
+    
+    
+    .Text::after{
+        background-color: #2e2e35;
+        color: white;
+        
+    }
+
+    .Target{
+        width: 20vw;
+        padding: 7px;
+        background-color: #2e2e35;
+        
+    }
+    
+    .button{
+        padding: 7px;
+        margin-block: 2vh;
+        border-radius: 7px;
+        border-color:rgb(175, 161, 161) ;
+
+    }
+    .button:hover{
+        color: crimson;
+        border-color:crimson ;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <form method="POST">
+    <label for="Text">Enter Text</label>
+    <br>
+    <input type="text" name="Text" class="Text">
+    <p>Target Language</p>
+    <select id="Target" class="Target" name="Target">
+        <option value="Telugu">Telugu</option>
+        <option value="Tamil">Tamil</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Bengali">Bengali</option>
+        <option value="Englsih">Englsih</option>
+      </select>
+      <br>
+      <input type="submit" value="Translate" class="button"></input>
+    </form>
+    {%if message %}
+    <h2>{{ message }}</h2>
+    {% endif %}
+</div>
+</body>
+</html>
+
+
+
+ <!-- <!DOCTYPE html> 
+ <html lang="en"> 
+ <head> 
+     <meta charset="UTF-8"> 
+     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+     <title>Document</title> 
+ </head> 
+ <body> 
+     <form method="POST"> 
+         <textarea name="textarea"></textarea> 
+         <input type="submit" value="Submit"> 
+     </form> 
+ </body> 
+ </html>
+  
+
+  <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text in HTML</title>
+</head>
+<body>
+    <form method="post">
+        <input type="text" name="text" id="text" placeholder="Enter text here">
+        <input type="submit" value="Submit">
+    </form>
+    {% if message %}
+    <h1>{{ message }}</h1>
+    {% endif %}
+</body>
+</html> -->

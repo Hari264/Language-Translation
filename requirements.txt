@@ -1,6 +1,7 @@
 transformers
 torch
-flask
+Flask
 sentencepiece
 scikit-learn
 sacremoses
+Gunicorn
